@@ -18,6 +18,8 @@ import {RecipesStartComponent} from './recipes/recipes-start/recipes-start.compo
 import {RecipeEditComponent} from './recipes/recipe-edit/recipe-edit.component';
 import {RecipeService} from "./recipes/recipe.service";
 import {HttpClientModule} from "@angular/common/http";
+import {AuthComponent} from "./auth/auth.component";
+import {LoadingSpinnerComponent} from "./shared/loading-spinner/loading-spinner.component";
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import {HttpClientModule} from "@angular/common/http";
     DropdownDirective,
     RecipesStartComponent,
     RecipeEditComponent,
+    AuthComponent,
+    LoadingSpinnerComponent
   ],
   imports: [BrowserModule, FormsModule, ReactiveFormsModule, HttpClientModule, AppRoutingModule],
   providers: [ShoppingListService, RecipeService],
