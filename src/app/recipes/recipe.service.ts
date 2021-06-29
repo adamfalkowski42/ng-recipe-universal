@@ -26,14 +26,11 @@ export class RecipeService {
   constructor(private slService: ShoppingListService) {}
 
   setRecipes(recipes: Recipe[]) {
-    console.log('SetRecipes is called');
     this.recipes = recipes;
     this.recipesChanged.next(this.recipes.slice());
   }
 
   getRecipes() {
-    console.log('Get recipes is called');
-    console.log('This is recipes: ', this.recipes);
     return this.recipes.slice();
     // return this.recipes;
   }
