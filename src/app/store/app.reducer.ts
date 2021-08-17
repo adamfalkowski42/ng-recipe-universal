@@ -2,6 +2,7 @@ import * as fromShoppingList from '../shoppingList/shopping-list/store/shopping-
 import * as fromAuth from '../auth/store/auth.reducer';
 import {ActionReducerMap} from "@ngrx/store";
 
+
 export interface AppState{
   shoppingList: fromShoppingList.State;
   auth: fromAuth.State;
