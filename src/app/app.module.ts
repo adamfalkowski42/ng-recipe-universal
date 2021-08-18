@@ -16,7 +16,7 @@ import {AuthEffects} from "./auth/store/auth.effects";
     AppComponent,
     HeaderComponent
   ],
-  imports: [BrowserModule, HttpClientModule, AppRoutingModule, StoreModule.forRoot(fromApp.appReducer), EffectsModule.forRoot([AuthEffects]),SharedModule, CoreModule],
+  imports: [BrowserModule, HttpClientModule, AppRoutingModule, StoreModule.forRoot(fromApp.appReducer), EffectsModule.forRoot([AuthEffects]), SharedModule, CoreModule],
   bootstrap: [AppComponent],
 
 })
