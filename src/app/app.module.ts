@@ -20,7 +20,7 @@ import {RecipesEffects} from "./recipes/store/recipes.effects";
     AppComponent,
     HeaderComponent
   ],
-  imports: [BrowserModule, HttpClientModule, AppRoutingModule, StoreModule.forRoot(fromApp.appReducer), EffectsModule.forRoot([AuthEffects,RecipesEffects]), SharedModule, CoreModule,
+  imports: [BrowserModule.withServerTransition({ appId: 'serverApp' }), HttpClientModule, AppRoutingModule, StoreModule.forRoot(fromApp.appReducer), EffectsModule.forRoot([AuthEffects,RecipesEffects]), SharedModule, CoreModule,
   StoreDevtoolsModule.instrument({logOnly: environment.production}),
     StoreRouterConnectingModule.forRoot(),],
   bootstrap: [AppComponent],
