@@ -29,7 +29,7 @@ const handleAuthentication = (
   const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
   const user = new User(email, userId, token, expirationDate);
   localStorage.setItem('userData', JSON.stringify(user));
-  return new AuthActions.AuthenticateSuccess({email, userId, token, expirationDate});
+  return new AuthActions.AuthenticateSuccess({email, userId, token, expirationDate, redirect: true});
 };
 
 const handleError = (errorRes: any) => {
@@ -121,8 +121,11 @@ export class AuthEffects {
   //     tap(action =>action.redirect && this.router.navigate(['/']))),{dispatch:false}
   // );
   @Effect({dispatch: false})
-  authSuccess = this.actions$.pipe(ofType(AuthActions.AUTHENTICATE_SUCCESS), tap(() => {
-    this.router.navigate(['/'])
+  authSuccess = this.actions$.pipe(ofType(AuthActions.AUTHENTICATE_SUCCESS),
+    tap((authSuccessAction: AuthActions.AuthenticateSuccess) => {
+      if(authSuccessAction.payload.redirect){
+        this.router.navigate(['/'])
+      }
   }));
   @Effect({dispatch: false})
   authLogout = this.actions$.pipe(ofType(AuthActions.LOGOUT),
@@ -152,7 +155,8 @@ export class AuthEffects {
             email: loadedUser.email,
             userId: loadedUser.id,
             token: loadedUser.token,
-            expirationDate: new Date(userData._tokenExpirationDate)
+            expirationDate: new Date(userData._tokenExpirationDate),
+          redirect: false
           })
         // const expirationDuration = new Date(userData._tokenExpirationDate).getTime() - new Date().getTime();
         // this.autoLogout(expirationDuration);

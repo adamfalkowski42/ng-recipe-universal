@@ -13,13 +13,14 @@ import {AuthEffects} from "./auth/store/auth.effects";
 import {StoreDevtoolsModule} from "@ngrx/store-devtools";
 import {environment} from "../environments/environment";
 import {StoreRouterConnectingModule} from "@ngrx/router-store"
+import {RecipesEffects} from "./recipes/store/recipes.effects";
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent
   ],
-  imports: [BrowserModule, HttpClientModule, AppRoutingModule, StoreModule.forRoot(fromApp.appReducer), EffectsModule.forRoot([AuthEffects]), SharedModule, CoreModule,
+  imports: [BrowserModule, HttpClientModule, AppRoutingModule, StoreModule.forRoot(fromApp.appReducer), EffectsModule.forRoot([AuthEffects,RecipesEffects]), SharedModule, CoreModule,
   StoreDevtoolsModule.instrument({logOnly: environment.production}),
     StoreRouterConnectingModule.forRoot(),],
   bootstrap: [AppComponent],
