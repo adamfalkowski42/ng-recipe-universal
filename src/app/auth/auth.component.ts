@@ -1,12 +1,8 @@
 import {Component, ComponentFactoryResolver, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {AuthResponseData, AuthService} from './auth.service';
-import {Observable, Subscription} from 'rxjs';
-import {Router} from '@angular/router';
+import {Subscription} from 'rxjs';
 import {AlertComponent} from '../shared/alert/alert.component'
-import {Placeholder} from "@angular/compiler/src/i18n/i18n_ast";
 import {PlaceholderDirective} from "../shared/placeholder/placeholder.directive";
-import {host} from "@angular-devkit/build-angular/src/test-utils";
 import {Store} from "@ngrx/store";
 import * as fromApp from '../store/app.reducer'
 import * as AuthActions from './store/auth.actions';
@@ -16,7 +12,7 @@ import * as AuthActions from './store/auth.actions';
   selector: 'app-auth',
   templateUrl: './auth.component.html',
 })
-export class AuthComponent implements OnDestroy,OnInit{
+export class AuthComponent implements OnDestroy, OnInit {
   isLoginMode = true;
   isLoading = false;
   error: string = null;
@@ -25,14 +21,14 @@ export class AuthComponent implements OnDestroy,OnInit{
   private closeSub: Subscription;
   private storeSub: Subscription;
 
-  constructor(private authService: AuthService, private router: Router, private componentFactoryResolver: ComponentFactoryResolver, private store: Store<fromApp.AppState>) {
+  constructor(private componentFactoryResolver: ComponentFactoryResolver, private store: Store<fromApp.AppState>) {
   }
 
   ngOnInit() {
-    this.storeSub = this.store.select('auth').subscribe(authState =>{
-      this.isLoading=authState.loading;
+    this.storeSub = this.store.select('auth').subscribe(authState => {
+      this.isLoading = authState.loading;
       this.error = authState.authError;
-      if(this.error){
+      if (this.error) {
         this.showErrorAlert(this.error);
       }
     })
@@ -55,9 +51,9 @@ export class AuthComponent implements OnDestroy,OnInit{
       this.store.dispatch(new AuthActions.LoginStart({email: email, password: password}));
     } else {
       // authObs = this.authService.signUp(email, password);
-      this.store.dispatch(new AuthActions.SignupStart({email:email,password:password}));
+      this.store.dispatch(new AuthActions.SignupStart({email: email, password: password}));
     }
-    this.store.select('auth').subscribe(authState =>{
+    this.store.select('auth').subscribe(authState => {
 
     })
     // authObs.subscribe(
@@ -79,10 +75,10 @@ export class AuthComponent implements OnDestroy,OnInit{
   }
 
   ngOnDestroy() {
-    if(this.closeSub){
+    if (this.closeSub) {
       this.closeSub.unsubscribe();
     }
-    if(this.storeSub){
+    if (this.storeSub) {
       this.storeSub.unsubscribe();
     }
   }
@@ -96,7 +92,7 @@ export class AuthComponent implements OnDestroy,OnInit{
     const componentRef = hostViewContainerRef.createComponent(alertComponentFactory);
 
     componentRef.instance.message = message;
-    this.closeSub = componentRef.instance.close.subscribe(()=>{
+    this.closeSub = componentRef.instance.close.subscribe(() => {
       this.closeSub.unsubscribe();
       hostViewContainerRef.clear();
     });
