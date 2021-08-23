@@ -10,7 +10,8 @@
     "dev:ssr": "ng run recipe-project:serve-ssr",
     "serve:ssr": "node dist/recipe-project/server/main.js",
     "build:ssr": "ng build && ng run recipe-project:server",
-    "prerender": "ng run recipe-project:prerender"
+    "prerender": "ng run recipe-project:prerender",
+    "prebuild:ssr": "ngcc"
   },
   "private": true,
   "dependencies": {
@@ -23,13 +24,20 @@
     "@angular/platform-browser-dynamic": "~12.0.0",
     "@angular/platform-server": "~12.0.0",
     "@angular/router": "~12.0.0",
+    "@nestjs/common": "^7.0.0",
+    "@nestjs/core": "^7.0.0",
+    "@nestjs/ng-universal": "^5.0.0",
+    "@nestjs/platform-express": "^7.0.0",
     "@ngrx/effects": "^12.4.0",
     "@ngrx/router-store": "^12.4.0",
     "@ngrx/store": "^12.3.0",
     "@nguniversal/express-engine": "^12.0.0",
     "@nguniversal/module-map-ngfactory-loader": "^8.2.6",
     "bootstrap": "3.4.1",
+    "class-transformer": "^0.2.3",
+    "class-validator": "^0.9.1",
     "express": "^4.15.2",
+    "reflect-metadata": "^0.1.13",
     "rxjs": "~6.6.0",
     "tslib": "^2.1.0",
     "zone.js": "~0.11.4"
